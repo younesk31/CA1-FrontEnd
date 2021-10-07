@@ -1,51 +1,65 @@
 import "./style.css"
 import "bootstrap/dist/css/bootstrap.css"
-import "./jokeFacade"
-import jokeFacade from "./jokeFacade"
+import personFacade from "./personFacade"
 
 document.getElementById("all-content").style.display = "block"
 
-/* 
-  Add your JavaScript for all exercises Below or in separate js-files, which you must the import above
-*/
-
-/* JS For Exercise-1 below */
-
-
-/* JS For Exercise-2 below */
 
 
 
-/* JS For Exercise-3 below */
-const URL = "https://manlyman69.rocks/CA1/api/person"
-fetch(URL)
-.then(res => res.json())
-.then(users => {
-  const userRows = users.map(user => `
+
+
+/* JS For PersonsData below */
+personFacade.getPersons()
+.then(persons => {
+  const personRows = persons.map(person => `
   <tr>
-    <td>${user.id}</td>
-    <td>${user.firstName}</td>
-    <td>${user.lastName}</td>
-    <td>${user.address.id}</td>
-    <td>${user.address.street}</td>
-    <td>${user.address.additionalInfo}</td>
-    <td>${user.address.cityInfoDTO.id}</td>
-    <td>${user.address.cityInfoDTO.zipcode}</td>
-    <td>${user.address.cityInfoDTO.city}</td>
+    <td>${person.id}</td>
+    <td>${person.firstName}</td>
+    <td>${person.lastName}</td>
+  </tr>
+  `)
+  const userRowsAsString = personRows.join("")
+  document.getElementById("allUserRows").innerHTML = userRowsAsString
+})
 
-    <td>${user.phones.map(phone => `${phone.id }
+/*
+personFacade.getPersons()
+.then(persons => {
+  const personRows = persons.map(person => `
+  <tr>
+    <td>${person.id}</td>
+    <td>${person.firstName}</td>
+    <td>${person.lastName}</td>
+
+    <td>${person.address.id}</td>
+    <td>${person.address.street}</td>
+    <td>${person.address.additionalInfo}</td>
+    <td>${person.address.cityInfoDTO.id}</td>
+    <td>${person.address.cityInfoDTO.zipcode}</td>
+    <td>${person.address.cityInfoDTO.city}</td>
+
+    <td>${person.phones.map(phone => `${phone.id }
     <td>${phone.number}</td>
     <td>${phone.description}</td>`)}</td>
 
-    <td>${user.hobbies.map(hobby => `${hobby.id }
+    <td>${person.hobbies.map(hobby => `${hobby.id }
     <td>${hobby.name}</td>
     <td>${hobby.description}</td>`)}</td>
-
+    
   </tr>
   `)
-  const userRowsAsString = userRows.join("")
+  const userRowsAsString = personRows.join("")
   document.getElementById("allUserRows").innerHTML = userRowsAsString
-})
+}) 
+*/
+
+
+// GET TESTS
+personFacade.allZipcodes();
+personFacade.personZipcode(3911);
+personFacade.personHobby("DET");
+
 
 
 /* 
@@ -54,25 +68,27 @@ the Period2-week2-day3 Exercises
 */
 
 function hideAllShowOne(idToShow) {
-  document.getElementById("about_html").style = "display:none"
-  document.getElementById("ex1_html").style = "display:none"
-  document.getElementById("ex2_html").style = "display:none"
-  document.getElementById("ex3_html").style = "display:none"
+  document.getElementById("frontpage_html").style = "display:none"
+  document.getElementById("addPerson_html").style = "display:none"
+  document.getElementById("Hobbys_html").style = "display:none"
+  document.getElementById("Zipcodes_html").style = "display:none"
+  document.getElementById("PersonsData_html").style = "display:none"
   document.getElementById(idToShow).style = "display:block"
 }
 
 function menuItemClicked(evt) {
   const id = evt.target.id;
   switch (id) {
-    case "ex1": hideAllShowOne("ex1_html"); break
-    case "ex2": hideAllShowOne("ex2_html"); break
-    case "ex3": hideAllShowOne("ex3_html"); break
-    default: hideAllShowOne("about_html"); break
+    case "PersonsData": hideAllShowOne("PersonsData_html"); break
+    case "Hobbys": hideAllShowOne("Hobbys_html"); break
+    case "Zipcodes": hideAllShowOne("Zipcodes_html"); break
+    case "addperson": hideAllShowOne("addPerson_html"); break
+    default: hideAllShowOne("frontpage_html"); break
   }
   evt.preventDefault();
 }
 document.getElementById("menu").onclick = menuItemClicked;
-hideAllShowOne("about_html");
+hideAllShowOne("frontpage_html");
 
 
 

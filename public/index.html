@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack/Babel-demo</title>
+  <title>CA1 - Front End</title>
 </head>
 
 <body>
@@ -15,88 +15,120 @@
   -->
   <div id="all-content" style="display: none;">
     <ul id="menu" class="header">
-      <li><a href="" id="about">About</a></li>
-      <li><a href="" id="ex1">Ex1</a></li>
-      <li><a href="" id="ex2">Ex2</a></li>
-      <li><a href="" id="ex3">Person Data</a></li>
+      <li><a href="" id="frontpage">Front Page</a></li>
+      <li><a href="" id="PersonsData">Person Data</a></li>
+      <li><a href="" id="Hobbys">Hobbys</a></li>
+      <li><a href="" id="Zipcodes">Zipcodes</a></li>
+      <li><a href="" id="addperson">New Person</a></li>
     </ul>
 
     <div class="content">
 
-      <!-- This is were you should place your basic HTML for exercise-1 -->
-      <div id="ex1_html" style="display:none;">
-        <h3>Exercise 1</h3>
-        <p>Add your basic HTML for Exercise 1 here</p>
-        <ul id="jokes"></ul>
+      <!-- Add New Person -->
+      <div id="addPerson_html" style="display:none;">
+        <h3>Add New Person</h3>
+        <p>Add New Person here</p>
 
       </div>
-      <!-- End of HTML for exercise-1 -->
 
+      <!-- Hobbys -->
+      <div id="Hobbys_html" style="display:none;">
+        <h3>Hobbys</h3>
 
-
-      <!-- This is were you should place your basic HTML for exercise-2 -->
-      <div id="ex2_html" style="display:none;">
-        <h3>Exercise 2</h3>
-        <p id="ex2p">Add your basic HTML for Exercise 2 here</p>
       </div>
-      <!-- End of HTML for exercise-2 -->
 
+      <!-- Zipcodes -->
+      <div id="Zipcodes_html" style="display:none;">
+        <h3>Zipcodes</h3>
 
-      <!-- This is were you should place your basic HTML for exercise-3 -->
-      <div id="ex3_html" style="display:none;">
+      </div>
+
+      <!-- Persons -->
+      <div id="PersonsData_html" style="display:none;">
         <h3>Person Data</h3>
-        <p>Add your basic HTML for Exercise 3 here</p>
+        <p>Basic info about the persons in Database</p>
 
-        <div class="row" style="min-height: 5em;">
-      <div class=" col-md-8 pre-scrollable" style="background-color: lightgrey;">
-          <h5>All Persons</h5>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
-                <th>Phone</th>
-            </thead>
-            <tbody id="allUserRows">
-            <tbody>
-          </table>
-        </div>
-        <div class="col-md-4" style="background-color: powderblue;">
-          <h5>Find User</h5>
+
+        <div class="card-body">
+          <div class="row" style="min-height: 5em;">
+            <div class="col-md-8 pre-scrollable" style="background-color: lightgrey;">
+              <h5>Person Data</h5>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Person ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <!-- 
+                  <th>Address ID</th>
+                  <th>Street</th>
+                  <th>Info</th>
+                  <th>City ID</th>
+                  <th>Zipcode</th>
+                  <th>City</th>
+                  <th>Phone ID</th>
+                  <th>Number</th>
+                  <th>Description</th>
+                  <th>Hobby ID</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  -->
+                </thead>
+                <tbody id="allUserRows">
+                <tbody>
+              </table>
+            </div>
+
+
+            <div class="col-md-4" style="background-color: lightgrey;">
+              <!-- ADD PERSON -->
+              <h5>Add Person</h5>
+              <button class="btn btn-outline-success" type="button">Add new Person</button>
+              <!-- EDIT PERSON -->
+              <h5>Edit Person</h5>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Person ID" aria-label="Person ID"
+                  aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary" type="button">Confirm</button>
+                </div>
+              </div>
+              <!-- PERSON INFO -->
+              <h5>Person Info</h5>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Person ID" aria-label="Person ID"
+                  aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button">Get Data</button>
+                </div>
+              </div>
+              <hr>
+              <!-- DELETE PERSON -->
+              <h5>Delete Person</h5>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Person ID" aria-label="Person ID"
+                  aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-danger" type="button">Confirm</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row" style="min-height: 5em;">
-        <div class="col-md-4" style="background-color: powderblue;">
-          <h5>Add User</h5>
-        </div>
-        <div class="col-md-4" style="background-color: lightgrey;">
-          <h5>Edit User</h5>
-        </div>
-        <div class="col-md-4" style="background-color: powderblue;">
-          <h5>Delete User</h5>
-        </div>
+
+      <!---- Front Page -->
+      <div id="frontpage_html" style="display:none;">
+        <h2>Front Page til CA1 - Front end Application</h3>
+          <h4>Af Younes @ cph-yk31@cphbusiness.dk
+        </h2>
       </div>
-      <!-- </div> -->
-      <!-- End of HTML for exercise-3 -->
-
-      <!---- HTML for the About page -->
-
     </div>
 
-    <div id="about_html" style="display:none;">
-      <h3>About</h3>
-    </div>
-    <!-- End of HTML for ABOUT Page -->
-
-
-    <!--End of all content -->
-  </div>
-
-  <!-- #################################################################-->
-  <!-- IMPORTANT  DO NOT IMPORT ANY JavaScript in this file by YOURSELF -->
-  <!-- #################################################################-->
+    <!-- #################################################################-->
+    <!-- IMPORTANT  DO NOT IMPORT ANY JavaScript in this file by YOURSELF -->
+    <!-- #################################################################-->
 
 </body>
 
