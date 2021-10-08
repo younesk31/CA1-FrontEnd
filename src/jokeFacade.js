@@ -1,8 +1,3 @@
-/*
-  This file is just added to show you how you can use ES6 exports
-  Observe, in index.js, how you can import
-*/
-
 //Setup some dummy test data
 const jokes = [
   "A day without sunshine is like, night.",
@@ -29,7 +24,5 @@ const jokeFacade = {
   getJokes
 }
 
-
-window.jokes = jokes; //Only for debugging
 
 export default jokeFacade;

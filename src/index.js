@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css"
 import * as bootstrap from 'bootstrap';
 import '@popperjs/core';
 import { SERVER_URL } from './constants'
+import jokeFacade from "./jokeFacade";
 
 document.getElementById("all-content").style.display = "block"
 
@@ -105,7 +106,6 @@ function editPerson(id) {
       editModal.toggle()
     })
     .catch(errorHandling)
-
 }
 
 document.getElementById("modal-edit-save-btn").addEventListener('click', updatePerson)
@@ -262,7 +262,8 @@ function handleHttpErrors(res) {
 function errorHandling(err) {
   console.log(err)
   if (err.status) {
-    err.fullError.then(e => console.log(e.message))
+    err.fullError.then(e => alert(e.message + 
+    "\n Try using correct data and try again!"))
   }
   else {
     console.log("Network error")
@@ -270,6 +271,19 @@ function errorHandling(err) {
 }
 
 
+function joke() {
+  const allRows = `<tr>
+  <td>${z.id}</td>
+  <td>${z.zipcode}</td>
+  <td>${z.city}</td>
+  <td>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button id="${z.id}" type="button" name="lookup" class="btn btn-light">Persons from this zipcode</button>
+    </div>
+  </td>
+  </tr>`
+  document.getElementById("tablerows").innerHTML = allRows.join("")
+}
 
 
 /* 
@@ -289,7 +303,7 @@ function menuItemClicked(evt) {
   switch (id) {
     case "persons": hideAllShowOne("person"); getAllPersons(); break
     case "zipcodes": hideAllShowOne("zipcodes_html"); getAllZips(); break
-    default: hideAllShowOne("about_html"); break
+    default: hideAllShowOne("about_html"); joke(); break
   }
   evt.preventDefault();
 }
