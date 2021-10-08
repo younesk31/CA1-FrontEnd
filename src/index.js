@@ -271,21 +271,6 @@ function errorHandling(err) {
 }
 
 
-function joke() {
-  const allRows = `<tr>
-  <td>${z.id}</td>
-  <td>${z.zipcode}</td>
-  <td>${z.city}</td>
-  <td>
-    <div class="btn-group" role="group" aria-label="Basic example">
-      <button id="${z.id}" type="button" name="lookup" class="btn btn-light">Persons from this zipcode</button>
-    </div>
-  </td>
-  </tr>`
-  document.getElementById("tablerows").innerHTML = allRows.join("")
-}
-
-
 /* 
 Do NOT focus on the code below, UNLESS you want to use this code for something different than
 the Period2-week2-day3 Exercises
@@ -303,7 +288,7 @@ function menuItemClicked(evt) {
   switch (id) {
     case "persons": hideAllShowOne("person"); getAllPersons(); break
     case "zipcodes": hideAllShowOne("zipcodes_html"); getAllZips(); break
-    default: hideAllShowOne("about_html"); joke(); break
+    default: hideAllShowOne("about_html"); break
   }
   evt.preventDefault();
 }
