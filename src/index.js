@@ -9,6 +9,9 @@ document.getElementById("all-content").style.display = "block"
 
 /* JS For Person below */
 
+let addModalElement = document.getElementById("addmodal")
+let addmodal = new bootstrap.Modal(addModalElement)
+
 let editModalElement = document.getElementById("editmodal")
 let editModal = new bootstrap.Modal(editModalElement)
 
@@ -27,26 +30,63 @@ document.getElementById("tablerows").addEventListener('click', e => {
     case "edit": editPerson(id); break;
     case "delete": deletePerson(id); break;
   }
-
 })
+document.getElementById("ziprows").addEventListener('click', inAZipSearch)
 
-document.getElementById("ziprows").addEventListener('click', e => {
-  e.preventDefault();
-  const node = e.target
-  const name = node.getAttribute("name")
-  const id = node.getAttribute("id")
-  switch (name) {
-    case "lookup": inAZipSearch(id); break;
-  
+document.getElementById("addPerson_btn").addEventListener('click', addPerson)
+
+function addPerson() {
+  addmodal.toggle()
+}
+
+document.getElementById("modal-create-person-btn").addEventListener('click', createPerson)
+
+function createPerson() {
+  const personObject = {
+    firstName: document.getElementById("newfirstName").value,
+    lastName: document.getElementById("newlastName").value,
+    address: {
+      street: document.getElementById("newaddress_street").value,
+      additionalInfo: document.getElementById("newaddress_info").value,
+      cityInfoDTO: {
+        zipcode: document.getElementById("newcity_zip").value,
+        city: document.getElementById("newcity_name").value
+      }
+    },
+    phones: [
+      {
+        number: document.getElementById("newphone_num").value,
+        description: document.getElementById("newphone_disc").value
+      }
+    ],
+    hobbies: [
+      {
+        name: document.getElementById("newhobby_name").value,
+        description: document.getElementById("newhobby_disc").value
+      }
+    ]
   }
 
-})
+  const options = makeOptions('POST', personObject)
+
+  fetch(`${SERVER_URL}/person`, options)
+    .then(handleHttpErrors)
+    .then(data => {
+      addmodal.toggle()
+      getAllPersons()
+    })
+    .catch(errorHandling)
+}
+
+
 
 function editPerson(id) {
 
   fetch(`${SERVER_URL}/person/${id}`)
     .then(handleHttpErrors)
     .then(data => {
+      console.log(data.id)
+      console.log(data.firstName)
       document.getElementById("edit_id").value = data.id
       document.getElementById("firstName").value = data.firstName
       document.getElementById("lastName").value = data.lastName
@@ -98,7 +138,8 @@ function updatePerson() {
         name: document.getElementById("hobby_name").value,
         description: document.getElementById("hobby_disc").value
       }
-    ]}
+    ]
+  }
 
   const options = makeOptions('PUT', personObject)
 
@@ -121,14 +162,14 @@ function deletePerson(id) {
 function removePerson() {
   const id = document.getElementById("edit_id").value
 
-  const options = makeOptions("DELETE",id)
+  const options = makeOptions("DELETE", id)
 
-  fetch(`${SERVER_URL}/person/${id}`,options)
-  .then(data => {
-    deletemodal.toggle()
-    getAllPersons()
-  })
-  .catch(errorHandling)
+  fetch(`${SERVER_URL}/person/${id}`, options)
+    .then(data => {
+      deletemodal.toggle()
+      getAllPersons()
+    })
+    .catch(errorHandling)
 }
 
 
@@ -166,7 +207,7 @@ function getPersonTableRow(p) {
 }
 
 
-function inAZipSearch(id){
+function inAZipSearch(id) {
   zipmodal.toggle()
 }
 

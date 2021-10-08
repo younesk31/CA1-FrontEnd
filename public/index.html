@@ -42,11 +42,73 @@
               <th><button type="button" class="btn btn-warning" id="addPerson_btn">Add New Person</button></th>
             </tr>
           </thead>
-          <tbody id="tablerows">
-
-          </tbody>
+          <tbody id="tablerows"></tbody>
         </table>
 
+        <div id="addmodal" class="modal" tabindex="-1">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Add New Person</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Please input the fields for person creation</p>
+                <!-- First Name -->
+                <div class="form-group">
+                  <label for="newfirstName">First name</label>
+                  <input type="text" id="newfirstName" name="newfirstName" class="form-control"></input>
+                </div>
+                <!-- Last Name -->
+                <div class="form-group">
+                  <label for="newlastName">Last name</label>
+                  <input type="text" id="newlastName" name="newlastName" class="form-control"></input>
+                </div>
+                <!-- Addresses -->
+                <div class="form-group">
+                  <label for="newaddress_street">Street</label>
+                  <input type="text" id="newaddress_street" name="newaddress_street" class="form-control"></input>
+                </div>
+                <div class="form-group">
+                  <label for="newaddress_info">Additional Info</label>
+                  <input type="text" id="newaddress_info" name="newaddress_info" class="form-control"></input>
+                </div>
+                <!-- City & Zipcode -->
+                <div class="form-group">
+                  <label for="newcity_zip">Zip</label>
+                  <input type="number" id="newcity_zip" name="newcity_zip" class="form-control"></input>
+                </div>
+                <div class="form-group">
+                  <label for="newcity_name">City</label>
+                  <input type="text" id="newcity_name" name="newcity_name" class="form-control"></input>
+                </div>
+                <!-- Phone info -->
+                <div class="form-group">
+                  <label for="newphone_num">Phone</label>
+                  <input type="number" id="newphone_num" name="newphone_num" class="form-control"></input>
+                </div>
+                <div class="form-group">
+                  <label for="newphone_disc">Additional Phone Info</label>
+                  <input type="text" id="newphone_disc" name="newphone_disc" class="form-control"></input>
+                </div>
+                <!-- Hobby -->
+                <div class="form-group">
+                  <label for="newhobby_name">Hobby</label>
+                  <input type="text" id="newhobby_name" name="newhobby_name" class="form-control"></input>
+                </div>
+                <div class="form-group">
+                  <label for="newhobby_disc">Hobby Description Url</label>
+                  <input type="url" id="newhobby_disc" name="newhobby_disc" class="form-control"></input>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" id="modal-create-person-btn">Create Person</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div id="editmodal" class="modal" tabindex="-1">
           <div class="modal-dialog modal-xl">
