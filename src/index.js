@@ -3,10 +3,8 @@ import "bootstrap/dist/css/bootstrap.css"
 import * as bootstrap from 'bootstrap';
 import '@popperjs/core';
 import { SERVER_URL } from './constants'
-import jokeFacade from "./jokeFacade";
 
 document.getElementById("all-content").style.display = "block"
-
 
 /* JS For Person below */
 
@@ -32,7 +30,14 @@ document.getElementById("tablerows").addEventListener('click', e => {
     case "delete": deletePerson(id); break;
   }
 })
-document.getElementById("ziprows").addEventListener('click', inAZipSearch)
+
+document.getElementById("personInZip_btn").addEventListener('click', inAZipSearch)
+
+function inAZipSearch(id) {
+  zipmodal.toggle()
+}
+
+
 
 document.getElementById("addPerson_btn").addEventListener('click', addPerson)
 
@@ -86,8 +91,6 @@ function editPerson(id) {
   fetch(`${SERVER_URL}/person/${id}`)
     .then(handleHttpErrors)
     .then(data => {
-      console.log(data.id)
-      console.log(data.firstName)
       document.getElementById("edit_id").value = data.id
       document.getElementById("firstName").value = data.firstName
       document.getElementById("lastName").value = data.lastName
@@ -184,8 +187,6 @@ function getAllPersons() {
     .catch(errorHandling)
 }
 
-
-
 function getPersonTableRow(p) {
   return `<tr>
     <td>${p.id}</td>
@@ -206,31 +207,64 @@ function getPersonTableRow(p) {
     </tr>`
 }
 
-
-function inAZipSearch(id) {
-  zipmodal.toggle()
-}
-
 function getAllZips() {
   fetch(`${SERVER_URL}/person/zipcodes`)
     .then(handleHttpErrors)
     .then(data => {
-      const allRows = data.map(z => getZipTableRow(z))
+      const allRows = data.map(z => listZipTable(z))
       document.getElementById("ziprows").innerHTML = allRows.join("")
     })
     .catch(errorHandling)
 }
 
-function getZipTableRow(z) {
+
+document.getElementById("personInZipSearch_btn").addEventListener('click', inAZipSearchBtn)
+
+
+function inAZipSearchBtn() {
+  var zipcode_searched = document.getElementById("zipcodeSearchText").value
+  fetch(`${SERVER_URL}/person/zipcode/${zipcode_searched}`)
+  .then(handleHttpErrors)
+    .then(data => {
+      // Lav tabel rækker med data
+      const allRows = data.map(z => getZipTableRow(z))
+      document.getElementById("personsInZip").innerHTML = allRows.join("")
+      document.getElementById("personsZipFields").innerHTML = getZipTableFields() // (acting as a hidden table)
+    })
+    .catch(errorHandling)
+}
+
+function getZipTableFields() {
+  return `<tr>
+  <th>Id</th>
+  <th>First name</th>
+  <th>Last name</th>
+  <th>Phone</th>
+  <th>Street</th>
+  <th>Zip</th>
+  <th>City</th>
+  <th>Hobby</th>
+    </tr>`
+}
+
+function listZipTable(z) {
   return `<tr>
     <td>${z.id}</td>
     <td>${z.zipcode}</td>
     <td>${z.city}</td>
-    <td>
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button id="${z.id}" type="button" name="lookup" class="btn btn-light">Persons from this zipcode</button>
-      </div>
-    </td>
+    <td></td>
+    </tr>`
+}
+
+function getZipTableRow(z) {
+  return `<td>${z.id}</td>
+    <td>${z.firstName}</td>
+    <td>${z.lastName}</td>
+    <td>${z.phones.map(phone => `${phone.number}`)}</td>
+    <td>${z.address.street}</td>
+    <td>${z.address.cityInfoDTO.zipcode}</td>
+    <td>${z.address.cityInfoDTO.city}</td>
+    <td>${z.hobbies.map(hobby => `${hobby.name}`)}</td>
     </tr>`
 }
 
@@ -270,6 +304,22 @@ function errorHandling(err) {
   }
 }
 
+// not fully working
+function bootstrapErrorHandling(err) {
+  console.log(err)
+  if (err.status) {
+    err.fullError.then(e => `
+    <div class="alert alert-danger" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" 
+    aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    ${e.message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`)
+  }
+  else {
+    console.log("Network error")
+  }
+}
 
 /* 
 Do NOT focus on the code below, UNLESS you want to use this code for something different than

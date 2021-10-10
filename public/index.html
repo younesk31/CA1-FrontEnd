@@ -39,7 +39,12 @@
               <th>Zip</th>
               <th>City</th>
               <th>Hobby</th>
-              <th><button type="button" class="btn btn-warning" id="addPerson_btn">Add New Person</button></th>
+              <th>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-warning" id="addPerson_btn">Add New Person</button>
+                  <button type="button" class="btn btn-info" id="personWithHobby_btn">Search Person with Hobby(%)</button>
+                </div>
+              </th>
             </tr>
           </thead>
           <tbody id="tablerows"></tbody>
@@ -216,7 +221,10 @@
         </div>
       </div>
       <!-- End of HTML for Person -->
-      <!-- Hobbies Html -->
+
+      
+
+      <!-- Zipcodes Html -->
       <div id="zipcodes_html" style="display:none;">
         <h3>Zipcodes</h3>
         <p>List of all zipcodes</p>
@@ -226,24 +234,33 @@
               <th>Id</th>
               <th>zipcode</th>
               <th>city</th>
-              <th></th>
+              <th padding-left: 30px;><button type="button" class="btn btn-warning" id="personInZip_btn">Search for Person(s) in Zipcode</button></th>
             </tr>
           </thead>
           <tbody id="ziprows"></tbody>
         </table>
         <div id="zipmodal" class="modal" tabindex="-1">
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-lg">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Persons living here: </h5>
+                <h5 class="modal-title">Person(s) zipcode search</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <p>In Development</p>
+                <table id="personZip" class="table table-striped ">
+                  <thead>
+                    <tr>
+                      <tbody id="personsZipFields"></tbody>
+                    </tr>
+                  </thead>
+                  <tbody id="personsInZip"></tbody>
+                </table>
                 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                <input type="number" id="zipcodeSearchText" class="form-control" placeholder="Person(s) in zipcode" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                <button type="button" class="btn btn-warning" id="personInZipSearch_btn">Search</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
